@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title> DNS CHECKER </title>
+  </head>
+  <body class="bg-secondary">
+    <div class="container" id="contact-form" style="margin-top: 25%; margin-left: 600px;">
+        <form action="" name="" method="" >
+          <div class="row">
+            <div class="col form-group">
+              <input class="form-control form-control-lg" type="text" name="domainname" id="domainname" placeholder="ENTER A DOMAIN NAME" required>
+
+            </div>
+            <div class="col form-group">
+              <button type="submit" id="submit_btn" class="btn btn-info" style="height: 45px;">CHECK DNS</button>
+            </div>
+
+          </div>
+          <p class="rez" style="height:50px;"></p>
+
+
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}" ></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+      <!-- <script>
+    $('#domainname').on('keyup', function(){
+      if(!validateDomain($(this).val())){
+        // alert("invalid domain");
+        $('.rez').text('Invalid Domain');
+        $('.rez').css("color","red");
+        // $('#element').toast('show')
+
+    }else{
+        $('.rez').text('Valid Domain');
+        $('.rez').css("color","#17a2b8");
+
+    }
+});
+
+
+    function validateDomain(the_domain)
+  {
+    // strip off "http://" and/or "www."
+    the_domain = the_domain.replace("http://","");
+
+    the_domain = the_domain.replace("www.","");
+
+    var reg = /^(?!:\/\/)([a-zA-Z0-9-]+\.){0,5}[a-zA-Z0-9-][a-zA-Z0-9-]+\.[a-zA-Z]{2,64}?$/gi;
+    return reg.test(the_domain);
+  } // end validateDomain()
+  </script> -->
+  <!-- <script>function CheckIsValidDomain(domain) {
+    var re = new RegExp(/^((?:(?:(?:\w[\.\-\+]?)*)\w)+)((?:(?:(?:\w[\.\-\+]?){0,62})\w)+)\.(\w{2,6})$/);
+    return domain.match(re);
+}
+</script> -->
+
+
+<!-- //   <script>
+//
+//   function CheckAll() {
+//
+//     var length = document.getElementById('username').value.length;
+//     var value = document.getElementById('username').value;
+//
+//     for (var i = 0; i < length; i++) {
+//         if (!(/^[0-9a-zA-Z_.-]+$/.test(value))) {
+//             alert("username must be made of characters and numbers only");
+//             return false;
+//         }else{
+//
+//             return true;
+//         }
+//
+//     }
+//
+//   }
+// </script> -->
+
+
+    </body>
+</html>
