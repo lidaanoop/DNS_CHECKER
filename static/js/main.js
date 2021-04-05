@@ -1,28 +1,99 @@
 $(document).ready(function() {
-    $('#submit_btn').click(function(e) {
-        var doma = $('#domainname').val();
-        console.log(doma)
-        if(!/^(http(s)?\/\/:)?(www\.)?[a-zA-Z\-]{3,}(\.(com|net|org))?$/.test(doma))
-            {
-                // alert('invalid domain name');
-                $('.rez').text('Invalid Domain');
-                return false;
-            }
-        else{
-          $('.rez').text('valid Domain');
-        //   var $loaderId        =   "#submit_btn";
-        //   var $loaderText      =   "Updating...";
-        //   $($loaderId).prop("disabled", true);
-        //   $($loaderId).html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;` + $loaderText);
-        //   var $id = e.target.id;
-        //   var $f = $("#" + $id);
-        //   var $url = "dns_checker.py?" + $f.serialize();
-        //     url: $url,
-        // $.ajax({
+
+    $(document).on('submit',"#formid",function(e) {
+
+
+
+        // if(/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(doma))
+        //     {
+        //
+        //       $('.rez').text('invalid domain');
+        //
+        //
+        //
+        //
+        //
+        //     }
+        // else{
+        //
+        //   $.ajax({
+        //     data:{
+        //       domainname: $('#domainname').val(),
+        //     },
+        //     type: 'POST',
+        //     url: '/process',
+        //   })
+        //   .done(function(data){
+        //     if(data.arecord){
+        //       $('#arecord').text(data.arecord).show();
+        //       $('#dnsrecords').text(data.arecord).show();
+        //     }
+        //     if(data.cName){
+        //       $('#aValue').text(data.cName).show();
+        //       $('#dnsrecords').text(data.cName).show();
+        //     }
+        //
         //
         //   })
-      }
+        //
+        // }
 
+        var domainname = $('#domainname').val();
+        // console.log(domainname)
+        if(/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(domainname)){
+          $.ajax({
+                url: '/',
+             method: 'POST',
+               data: {
+                        'domainname':domainname
+                      },
+            success: function(response){
+                    // console.log(response);
+                    document.querySelector("#show_table").style.display = "block";
+                    // console.log(JSON.parse(JSON.stringify(response)));
+                    var response = JSON.parse(JSON.stringify(response));
+                    // console.log(response.arecord[0]);
+
+                    // Object.keys(response).forEach(function(key,index){
+                      // console.log(response[key]);
+                      // console.log(index(response));
+                      // console.log(key.index);
+                      // console.log(array)
+                    // });
+                    // each(object, (value, key, object) => {
+                    //   console.log(key + ': ' + value);
+                    // });
+                    //
+
+
+                    Object.keys(response).forEach(function(key,index){
+                      $("#table_records").append("<tr>"+
+                      "<td>"+key+"</td>"+
+                    // //
+                      "<td>"+response[key]+"</td"
+                    // //
+                    // //
+                      +"</tr>"
+                      );
+                    });
+
+
+              // var str = 'some text that you send to the console...';
+              // document.getElementById("record_table").innerHTML = response;
+                                          // document.getElementById("record_table").innerHTML = '<h1>hello</h1>''
+
+                                          },
+             error: function(error){
+                                    console.log(error);
+                                    }
+          });
+
+
+        }
+        else{
+          alert("Please Enter a Valid Domain")
+        }
+        e.preventDefault();
       });
     });
 
