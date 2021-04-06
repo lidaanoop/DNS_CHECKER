@@ -19,7 +19,10 @@ def dns_checker():
         arecord = pydig.query(domainname,'A')
         cName=pydig.query(domainname, 'CNAME')
         print(arecord)
-        return jsonify({ 'arecord': arecord, 'domainname': domainname, 'cName': cName })
+        mxRecord = pydig.query(domainname, 'MX')
+
+
+        return jsonify({ 'arecord': arecord, 'domainname': domainname, 'cName': cName, 'mxRecord': mxRecord })
 
 
     return render_template('dns_checker.html')

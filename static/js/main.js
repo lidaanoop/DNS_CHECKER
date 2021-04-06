@@ -1,43 +1,9 @@
 $(document).ready(function() {
 
     $(document).on('submit',"#formid",function(e) {
-
-
-
-        // if(/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(doma))
-        //     {
-        //
-        //       $('.rez').text('invalid domain');
-        //
-        //
-        //
-        //
-        //
-        //     }
-        // else{
-        //
-        //   $.ajax({
-        //     data:{
-        //       domainname: $('#domainname').val(),
-        //     },
-        //     type: 'POST',
-        //     url: '/process',
-        //   })
-        //   .done(function(data){
-        //     if(data.arecord){
-        //       $('#arecord').text(data.arecord).show();
-        //       $('#dnsrecords').text(data.arecord).show();
-        //     }
-        //     if(data.cName){
-        //       $('#aValue').text(data.cName).show();
-        //       $('#dnsrecords').text(data.cName).show();
-        //     }
-        //
-        //
-        //   })
-        //
-        // }
-
+       // history.go(0);
+       // document.getElementById("#table_records").innerHTML = "";
+        $('#table_records').empty(true);
         var domainname = $('#domainname').val();
         // console.log(domainname)
         if(/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(domainname)){
@@ -49,35 +15,27 @@ $(document).ready(function() {
                       },
             success: function(response){
                     // console.log(response);
+                    // location.reload(true);
+                    // document.querySelector("#show_table").style.display = "None";
+                    // $('#show_table').empty();
+
                     document.querySelector("#show_table").style.display = "block";
+                    // $('#formid').off('click');
                     // console.log(JSON.parse(JSON.stringify(response)));
                     var response = JSON.parse(JSON.stringify(response));
-                    // console.log(response.arecord[0]);
-
-                    // Object.keys(response).forEach(function(key,index){
-                      // console.log(response[key]);
-                      // console.log(index(response));
-                      // console.log(key.index);
-                      // console.log(array)
-                    // });
-                    // each(object, (value, key, object) => {
-                    //   console.log(key + ': ' + value);
-                    // });
-                    //
-
-
+                    console.log(response);
                     Object.keys(response).forEach(function(key,index){
                       $("#table_records").append("<tr>"+
                       "<td>"+key+"</td>"+
-                    // //
-                      "<td>"+response[key]+"</td"
+                      // for(i=0,i<response[key].length,i++)
+                        "<td>"+response[key]+"</td"
                     // //
                     // //
                       +"</tr>"
                       );
                     });
 
-
+                    // $('#show_table').empty();
               // var str = 'some text that you send to the console...';
               // document.getElementById("record_table").innerHTML = response;
                                           // document.getElementById("record_table").innerHTML = '<h1>hello</h1>''
