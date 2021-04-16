@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, url_for
+from flask import Flask, render_template, request, jsonify, url_for, session
 import pydig
 import dns
 import dnspython
@@ -8,37 +8,39 @@ from requests import get
 from dns import resolver
 
 
+
+
+
 app = Flask(__name__,template_folder='template')
+app.secret_key = "abc"
 
 @app.route("/", methods=['POST','GET'])
 def dns_checker():
     if request.method == 'POST':
-        print(request.form['domainname'])
-        domainname=request.form['domainname']
-        print(domainname)
-        arecord = pydig.query(domainname,'A')
+        session['domainname']=request.form['domainname']
+        domainname=session['domainname']
+        # print(session['domainname'])
+        # print(domainname)
+        # arecord = pydig.query(domainname,'A')
+        session['arecord'] = pydig.query(domainname,'A')
+        arecord=session['arecord']
+        # print(arecord[0])
         cName=pydig.query(domainname, 'CNAME')
-        print(arecord)
+        # print(arecord)
         mxRecord = pydig.query(domainname, 'MX')
 
-
-        return jsonify({ 'arecord': arecord, 'domainname': domainname, 'cName': cName, 'mxRecord': mxRecord })
+        print(mxRecord)
+        # return render_template('dns_checker.html', arecord='alina',mxRecord=mxRecord, cName=cName, domainname=domainname)
+        return jsonify({ 'arecord': arecord, 'cName': cName, 'mxRecord': mxRecord })
 
 
     return render_template('dns_checker.html')
 
-@app.route("/getdata", methods=['GET'])
-def getdata():
-    domainname=request.form['domainname']
-    print(domainname)
-    arecord = pydig.query(domainname,'A')
-    cName=pydig.query(domainname, 'CNAME')
-    print(arecord)
-    # print(cName)
-    return jsonify({ 'arecord': arecord, 'domainname': domainname, 'cName': cName })
 
 
-
+# def get_arecord():
+#     arecord = pydig.query(domainname,'A')
+#     return arecord
 # @app.route("/process", methods=['POST'])
 # def process():
 #     domainname=request.form['domainname']
@@ -63,4 +65,6 @@ def getdata():
 
 
 if __name__ == "__main__":
+    app.config["DEBUG"] = True
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.run()

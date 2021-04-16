@@ -1,50 +1,32 @@
 $(document).ready(function() {
-
     $(document).on('submit',"#formid",function(e) {
-       // history.go(0);
-       // document.getElementById("#table_records").innerHTML = "";
         $('#table_records').empty(true);
         var domainname = $('#domainname').val();
-        // console.log(domainname)
         if(/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(domainname)){
-          $.ajax({
-                url: '/',
-             method: 'POST',
-               data: {
+            $.ajax({
+                   url: '/',
+                method: 'POST',
+                  data: {
                         'domainname':domainname
-                      },
-            success: function(response){
-                    // console.log(response);
-                    // location.reload(true);
-                    // document.querySelector("#show_table").style.display = "None";
-                    // $('#show_table').empty();
-
-                    document.querySelector("#show_table").style.display = "block";
-                    // $('#formid').off('click');
-                    // console.log(JSON.parse(JSON.stringify(response)));
-                    var response = JSON.parse(JSON.stringify(response));
-                    console.log(response);
-                    Object.keys(response).forEach(function(key,index){
-                      $("#table_records").append("<tr>"+
-                      "<td>"+key+"</td>"+
-                      // for(i=0,i<response[key].length,i++)
-                        "<td>"+response[key]+"</td"
-                    // //
-                    // //
-                      +"</tr>"
-                      );
-                    });
-
-                    // $('#show_table').empty();
-              // var str = 'some text that you send to the console...';
-              // document.getElementById("record_table").innerHTML = response;
-                                          // document.getElementById("record_table").innerHTML = '<h1>hello</h1>''
-
-                                          },
-             error: function(error){
-                                    console.log(error);
-                                    }
-          });
+                        },
+               success: function(response){
+                          var response=JSON.parse(JSON.stringify(response))
+                          jQuery.each(response, function(index, value){
+                              var content ="";
+                              content += "<tr>"+
+                                         "<td>"+index+"</td><td>"
+                              for(var i=0; i<value.length; i++){
+                                  content += value[i]+"<br/>"
+                              }
+                              content += "</td></tr>"
+                              $("#table_records").append(content);
+                          });
+                          document.querySelector("#show_table").style.display = "block";
+                        },
+                 error: function(error){
+                          console.log(error);
+                        }
+              });
 
 
         }
@@ -54,115 +36,3 @@ $(document).ready(function() {
         e.preventDefault();
       });
     });
-
-
-
-
-
-
-
-
-        //             $.ajax({
-        //               url: $url,
-        //               success: function(result) {
-        //                 // $("#v-pills-system .card-body > .no-gutters").load(($urlparam) + " #v-pills-system .card-body > .no-gutters > *");
-        //                   window.location.reload();
-        //                   $.toast({
-        //                       autohide: 'true',
-        //                     });
-        //                     $(".toast-new").toast("show").html(result);
-        //                     $(".toast").removeClass("toast-new");
-        //                   }
-        //                 });
-        //
-//         $('#contentajax').empty()
-//                          .css("border", "1px solid #CCCCCC")
-//                          .html('<p class="vent">Please wait...</p><p class="venter"><img src="../images/ajax.gif" /></p>');
-//         $.ajax({
-//             type: 'POST',
-//             url: 'http://localhost:3000/domain',
-//             data: {
-//                 domain: doma
-//             },
-//             success: function(msg){
-//                 $('#contentajax').html(msg);
-//                 $('#contentajax').css("border", "none");
-//             }
-//         });
-//     });
-// });
-//
-
-
-
-// $(function() {
-//    // set up form validation here
-//    $("form").validate();
-// });
-//
-// $( "form" ).on( "submit", function(e) {
-//
-//     var dataString = $(this).serialize();
-//
-//     // alert(dataString); return false;
-//
-//     $.ajax({
-//       type: "POST",
-//       url: "bin/process.php",
-//       data: dataString,
-//       success: function () {
-//         $("#contact_form").html("<div id='message'></div>");
-//         $("#message")
-//           .html("<h2>Contact Form Submitted!</h2>")
-//           .append("<p>We will be in touch soon.</p>")
-//           .hide()
-//           .fadeIn(1500, function () {
-//             $("#message").append(
-//               "<img id='checkmark' src='images/check.png' />"
-//             );
-//           });
-//       }
-//     });
-//
-//     e.preventDefault();
-//   });
-// });
-
-
-
-
-
-// $(document).on("submit","#ipaddressvalidate",function(e){
-//         var str = $("#ip").val();
-//         var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-//         if(str.match(ipformat)){
-//             var $loaderId        =   "#submit_btn";
-//             var $loaderText      =   "Updating...";
-//             $($loaderId).prop("disabled", true);
-//             $($loaderId).html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;` + $loaderText);
-//             var $id = e.target.id;
-//             var $f = $("#" + $id);
-//             var $url = "save_nemesida.live.py?" + $f.serialize();
-//             $.ajax({
-//               url: $url,
-//               success: function(result) {
-//                 // $("#v-pills-system .card-body > .no-gutters").load(($urlparam) + " #v-pills-system .card-body > .no-gutters > *");
-//                   window.location.reload();
-//                   $.toast({
-//                       autohide: 'true',
-//                     });
-//                     $(".toast-new").toast("show").html(result);
-//                     $(".toast").removeClass("toast-new");
-//                   }
-//                 });
-//
-//         }else{
-//           $.toast({
-//               autohide: 'true',
-//           });
-//           $(".toast-new").toast("show").html('<div class="alert alert-danger"><button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></button><p>Enter a valid IP!</p></div>');
-//           $(".toast").removeClass("toast-new");
-//
-//           }
-//
-//       });
