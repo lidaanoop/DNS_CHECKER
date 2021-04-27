@@ -14,7 +14,7 @@ import pydig
 app = Flask(__name__,template_folder='template')
 app.secret_key = "abc"
 
-@app.route("/", methods=['POST','GET'])
+@app.route("/dns_check", methods=['POST','GET'])
 def dns_checker():
     if request.method == 'POST':
         session['domainname']=request.form['domainname']
