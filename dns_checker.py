@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, jsonify, url_for, session
 import pydig
-import dns
-import dnspython
-import dns.resolver
-import dnspython as dns
+# import dns
+# import dnspython
+# import dns.resolver
+# import dnspython as dns
 from requests import get
 from dns import resolver
 
