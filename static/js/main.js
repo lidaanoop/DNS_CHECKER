@@ -4,7 +4,7 @@ $(document).ready(function() {
         var domainname = $('#domainname').val();
         if(/^(?!:\/\/)([a-zA-Z0-9-]+\.){0,5}[a-zA-Z0-9-][a-zA-Z0-9-]+\.[a-zA-Z]{2,64}?$/.test(domainname)){
             $.ajax({
-                   url: '/dnscheck',
+                   url: '/',
                 method: 'POST',
                   data: {
                         'domainname':domainname
