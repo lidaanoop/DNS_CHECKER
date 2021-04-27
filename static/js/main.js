@@ -2,7 +2,7 @@ $(document).ready(function() {
     $(document).on('submit',"#formid",function(e) {
         $('#table_records').empty(true);
         var domainname = $('#domainname').val();
-        if(/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(domainname)){
+        if(/^(?!:\/\/)([a-zA-Z0-9-]+\.){0,5}[a-zA-Z0-9-][a-zA-Z0-9-]+\.[a-zA-Z]{2,64}?$/.test(domainname)){
             $.ajax({
                    url: '/',
                 method: 'POST',
