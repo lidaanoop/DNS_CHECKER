@@ -4,8 +4,8 @@ import pydig
 # import dnspython
 # import dns.resolver
 # import dnspython as dns
-from requests import get
-from dns import resolver
+# from requests import get
+# from dns import resolver
 
 
 
