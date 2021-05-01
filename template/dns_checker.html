@@ -33,6 +33,33 @@
     </div>
 
     {% block body %} {% endblock %}
+    <script>
+    $('#formid').on('submit', function(){
+      // var domainname = $('#domainname').val();
+      if(!validateDomain($('#domainname').val())){
+        // alert("invalid domain");
+        alert('Invalid Domain');
+        return false;
+
+      }else{
+        return true;
+        // alert('valid Domain');
+        // // $('.rez').text('valid domain')
+
+      }
+    });
+
+    function validateDomain(the_domain){
+      // strip off "http://" and/or "www."
+      the_domain = the_domain.replace("http://","");
+
+      the_domain = the_domain.replace("www.","");
+
+      var reg = /^(?!:\/\/)([a-zA-Z0-9-]+\.){0,5}[a-zA-Z0-9-][a-zA-Z0-9-]+\.[a-zA-Z]{2,64}?$/gi;
+      return reg.test(the_domain);
+    } // end validateDomain()
+
+    </script>
 
 
     <script type=text/javascript src="{{ url_for('static', filename='js/main.js') }}" ></script>
