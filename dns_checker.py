@@ -16,8 +16,30 @@ app = Flask(__name__,template_folder='template')
 app.secret_key = "abc"
 # app("/static", express.static('./static/'));
 
-@app.route("/", methods=['POST','GET'])
+@app.route("/dnscheck", )
 def dns_checker():
+    # if request.method == 'POST':
+    #     session['domainname']=request.form['domainname']
+    #     domainname=session['domainname']
+    #     # print(session['domainname'])
+    #     # print(domainname)
+    #     # arecord = pydig.query(domainname,'A')
+    #     session['arecord'] = pydig.query(domainname,'A')
+    #     arecord=session['arecord']
+    #     # print(arecord[0])
+    #     cName=pydig.query(domainname, 'CNAME')
+    #     # print(arecord)
+    #     mxRecord = pydig.query(domainname, 'MX')
+    #
+    #     print(mxRecord)
+    #     return render_template("dns_details.html",arecord=arecord,cName=cName,mxRecord=mxRecord,len=len(arecord),len1=len(mxRecord))
+        # return render_template('dns_details.html')
+
+
+    return render_template('dns_checker.html')
+
+@app.route("/dnsresult", methods=['POST','GET'])
+def dns_result():
     if request.method == 'POST':
         session['domainname']=request.form['domainname']
         domainname=session['domainname']
@@ -33,12 +55,7 @@ def dns_checker():
 
         print(mxRecord)
         return render_template("dns_details.html",arecord=arecord,cName=cName,mxRecord=mxRecord,len=len(arecord),len1=len(mxRecord))
-        # return render_template('dns_details.html')
-
-
-    return render_template('dns_checker.html')
-
-
+        return render_template('dns_details.html')
 
 # def get_arecord():
 #     arecord = pydig.query(domainname,'A')
