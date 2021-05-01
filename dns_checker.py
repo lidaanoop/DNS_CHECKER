@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify, url_for, session
 import pydig
+# import express
 # import dns
 # import dnspython
 # import dns.resolver
@@ -13,6 +14,7 @@ import pydig
 
 app = Flask(__name__,template_folder='template')
 app.secret_key = "abc"
+# app("/static", express.static('./static/'));
 
 @app.route("/", methods=['POST','GET'])
 def dns_checker():
@@ -30,8 +32,8 @@ def dns_checker():
         mxRecord = pydig.query(domainname, 'MX')
 
         print(mxRecord)
-        # return render_template('dns_checker.html', arecord='alina',mxRecord=mxRecord, cName=cName, domainname=domainname)
-        return jsonify({ 'arecord': arecord, 'cName': cName, 'mxRecord': mxRecord })
+        return render_template("dns_details.html",arecord=arecord,cName=cName,mxRecord=mxRecord,len=len(arecord),len1=len(mxRecord))
+        # return render_template('dns_details.html')
 
 
     return render_template('dns_checker.html')
